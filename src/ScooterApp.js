@@ -8,11 +8,13 @@ class ScooterApp  {
     this.registeredUsers = registeredUsers;
   }
   registerUser(username, password,age){
-    if(User.age >= 18 && !this.registeredUsers.hasOwnProperty(User.username) ){
-      this.registeredUsers.push(user)
+    let user = new User(username,password,age);
+    if(user.age >= 18 && !this.registeredUsers.hasOwnProperty(user.username) ){
+      Object.assign(this.registeredUsers,{user});
+      console.log(this.registeredUsers);
     }
     else{
-      if(User.age < 18){
+      if(user.age < 18){
         throw new Error("too young to register")
       }
       else{
@@ -24,13 +26,15 @@ class ScooterApp  {
   }
   loginUser(username, password){
     //locate user and call login method
-    // if (.....){
-    //   console.log("User has been logged in")
+    let keys = Object.keys(this.registeredUsers)
+    console.log(keys.User)
+    if (this.registeredUsers.keys){
+      console.log("User has been logged in")
 
-    // }
-    // else{
-    //   console.log("Username or password is incorrect")
-    // }
+    }
+    else{
+      console.log("Username or password is incorrect")
+    }
     
   }
   logoutUser(station){
@@ -74,10 +78,14 @@ class ScooterApp  {
 const scooter1 = new Scooter ("salford");
 const scooter2 = new Scooter ("mediacity");
 const scooter3 = new Scooter ("salford");
+
 let stations = {"mediacity" : [scooter2], "salford" : [scooter1,scooter3] };
-let registeredUsers = {"lisa" : { username: 'Lisa', password: '*****', age: 30 },
-                           "benjy" : { username: 'benjy', password: '***', age: 20 }}
+let registeredUsers = {}
+
 const scooterApp1 = new ScooterApp(stations,registeredUsers);
-console.log(scooterApp1.stations)
+
+//const testUser = new User('benjy','***',20 )
+scooterApp1.registerUser('benjy','***',20)
+scooterApp1.loginUser('benjy','***')
 
 module.exports = ScooterApp
