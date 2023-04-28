@@ -20,7 +20,7 @@ describe("test the Users username", () =>{
 // test password
 describe("test the Users password", () =>{
     const user3 = new User('Max','*****',30);
-    test("test if username valid", () =>{
+    test("test if password valid", () =>{
         expect(user3.password).toEqual('*****');
     })
 
